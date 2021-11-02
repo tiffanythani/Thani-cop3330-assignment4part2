@@ -1,3 +1,0 @@
-list2 1;2021-11-8;Incomplete
-list2 2;2021-11-8;Completed
-list2 3;2021-11-8;Completed

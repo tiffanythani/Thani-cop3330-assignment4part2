@@ -259,38 +259,43 @@ public class HelloApplication extends Application {
         return itemView;
     }
 
+    public void save_indi(int i) throws IOException {
+        String listName = toDoLists.get(i).getTitle();
+        FileWriter myWriter = new FileWriter(listName + ".txt");
+
+
+        for (Item item : toDoLists.get(i).listItems ){
+            String fields = item.getDesc() + ";";
+            Date dueDate = item.getDate();
+            int year = dueDate.getYear();
+            int day = dueDate.getDate();
+            int month = dueDate.getMonth();
+            fields = fields + year +  "-" + month + "-" + day + ";";
+            if (item.isDone()){
+                fields = fields + "Completed\n";
+            }
+            else {
+                fields = fields + "Incomplete\n";
+            }
+            myWriter.write(fields);
+        }
+        myWriter.close();
+    }
+
     public void save(ActionEvent actionEvent) throws IOException {
         Button creationBut = (Button) actionEvent.getTarget();
         scene = creationBut.getScene();
-        String buttonText = creationBut.getText();
+        Button crate = (Button) scene.lookup("#creation_but");
+        String buttonText = crate.getText();
         boolean viewingLists = buttonText.contains("List");
 
         if (viewingLists){
             for (int i = 0; i < toDoLists.size(); i++ ){
-                String listName = toDoLists.get(i).getTitle();
-                FileWriter myWriter = new FileWriter(listName + ".txt");
-
-
-                for (Item item : toDoLists.get(i).listItems ){
-                    String fields = item.getDesc() + ";";
-                    Date dueDate = item.getDate();
-                    int year = dueDate.getYear();
-                    int day = dueDate.getDate();
-                    int month = dueDate.getMonth();
-                    fields = fields + year +  "-" + month + "-" + day + ";";
-                    if (item.isDone()){
-                        fields = fields + "Completed\n";
-                    }
-                    else {
-                        fields = fields + "Incomplete\n";
-                    }
-
-
-                    myWriter.write(fields);
-
-                }
-                myWriter.close();
+                save_indi(i);
             }
+        }
+        else {
+            save_indi(curListIndex);
         }
     }
 

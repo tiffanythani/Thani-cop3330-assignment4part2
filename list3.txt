@@ -1,2 +1,0 @@
-list3 1;2021-11-16;Incomplete
-list3 2;2021-11-16;Incomplete
