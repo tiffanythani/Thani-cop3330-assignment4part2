@@ -1,0 +1,28 @@
+JUnit Tests:
+
+1.  add a list and verify that the internal lenght of lists is == 1
+2.  call getTitle() of a list and verify it is not empty string
+3.  add an item to a todo list and verify the list contains item
+4.  call getDesc() of an item and verify it is not empty string
+5.  call get date, verify the fields are non zero integers
+6.  call add new to do list handler and verify the internal lists of toDoLists is bigger by 1
+7.  call remove list handler and verify that the internal lists of toDoLists is smaller by 1
+8.  call edit title handler and verify title has changed
+9.  call add item handler and verify that the internal list of items of  corresponding to that toDolist is
+    larger by 1.
+10. call remove item handler and verify that the internal list of items corresponding to that toDoLIst is
+     smaller by 1.
+11. call edit item handler and verify that the description is different than before
+12. call edit item handler and verify that the due date is different than before
+13. call edit item handler and verify that the completed boolean field is different than before
+14. call display items handler and count the number of items displayed, verify it is equal to the length
+    of the internally respresented list
+15. count the number of items that are incomplete and display them and verify that the number of incomplete items displayed
+    is equal to the count
+16. count the number of items that are complete and display them and verify that the number of complete items displayed
+    is equal to the count
+17. save items to file and verify that file exists
+18. save all items to file and verify that file exits for each list
+19. load file of todolist previously saved and make sure it loaded list matches the file contents
+20. load files of all todolists previously saved and make sure each loaded list matches the contents of
+    corresponding file

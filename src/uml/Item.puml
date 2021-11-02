@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Item {
+    itemDesc:String
+    due_date:Date
+    done:boolean
+}
+
+
+
+@enduml
