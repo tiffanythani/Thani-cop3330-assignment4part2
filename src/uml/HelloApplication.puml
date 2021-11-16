@@ -2,14 +2,25 @@
 'https://plantuml.com/class-diagram
 
 abstract class HelloApplication{
-     toDoLists:ArrayList<ToDoList>
-     curListIndex:int
-     curFilterIndex:int
-     scene:Scene
+    +toDoLists:ArrayList<ToDoList>
+    -curListIndex:int
+    +curFilterIndex:int
+    -scene:Scene
+    +start():void
+    +main():void
+    +createThings():void
+    +goBackHome():void
+    +makeItem():Item
+    +deleteThings():void
+    +editListItems():void
+    +showListItems():void
+    +visualizeContents():void
+    +makeItemView():HBox
+    +save_indi():void
+    +save():void
+    +load():void
+    +load_files():void
+    +clear_list():void
 }
-
-
-Application <|-- HelloApplication
-
 
 @enduml

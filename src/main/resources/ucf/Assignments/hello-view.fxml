@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-
-<?import javafx.scene.control.Button?>
 <!--
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="20.0"
       fx:controller="HelloController">
@@ -17,74 +15,61 @@
     <Button text="Hellooooooo!" onAction="#onHelloButtonClick"/>
 </VBox> -->
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.TextField?>
-<GridPane alignment="center" hgap="10" minHeight="500" minWidth="1000" prefHeight="500" prefWidth="1000" vgap="10" xmlns="http://javafx.com/javafx/11.0.2"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.Assignments.HelloApplication">
+<GridPane alignment="center" hgap="10" minHeight="500" minWidth="1000" prefHeight="500" prefWidth="1000" vgap="10" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.Assignments.HelloApplication">
     <padding><Insets bottom="5" left="1" right="1" top="1" /></padding>
 
     <columnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="50" minWidth="50" prefWidth="50"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
-        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100"></ColumnConstraints>
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="50" minWidth="50" prefWidth="50" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
+        <ColumnConstraints halignment="LEFT" maxWidth="200" minWidth="100" prefWidth="100" />
 
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10"></RowConstraints>
-        <RowConstraints minHeight="10"></RowConstraints>
-        <RowConstraints minHeight="70"></RowConstraints>
-        <RowConstraints minHeight="70"></RowConstraints>
-        <RowConstraints minHeight="70"></RowConstraints>
-        <RowConstraints minHeight="70"></RowConstraints>
-        <RowConstraints minHeight="70"></RowConstraints>
+        <RowConstraints minHeight="10" />
+        <RowConstraints minHeight="10" />
+        <RowConstraints minHeight="70" />
+        <RowConstraints minHeight="70" />
+        <RowConstraints minHeight="70" />
+        <RowConstraints minHeight="70" />
+        <RowConstraints minHeight="70" />
     </rowConstraints>
 
-    <Label fx:id="main_label" text="My To-Do List!" GridPane.rowIndex="0" GridPane.columnIndex="2"
-                                                    GridPane.columnSpan="2" GridPane.rowSpan="1"></Label>
+    <Label fx:id="main_label" text="My To-Do List!" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.rowSpan="1" />
 
-    <Button fx:id="home_but" text="HOME" onAction="#goBackHome" GridPane.rowIndex="0" GridPane.columnIndex="4"></Button>
+    <Button fx:id="home_but" onAction="#goBackHome" text="HOME" GridPane.columnIndex="4" GridPane.rowIndex="0" />
 
-    <VBox fx:id="creation_box" GridPane.rowIndex="2" GridPane.columnIndex="7"  GridPane.columnSpan="3"  GridPane.rowSpan="2"
-          alignment="TOP_LEFT" >
+    <VBox fx:id="creation_box" alignment="TOP_LEFT" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="2" GridPane.rowSpan="2">
         <children>
-            <Button fx:id="creation_but" onAction="#createThings" defaultButton="true" text="New List"></Button>   <!--onAction="#createThings"-->
-            <TextField fx:id="creation_text" text="List/Item desc here"></TextField>
+            <Button fx:id="creation_but" defaultButton="true" onAction="#createThings" text="New List" />   <!--onAction="#createThings"-->
+            <TextField fx:id="creation_text" text="List/Item desc here" />
         </children>
     </VBox>
 
-    <VBox fx:id="deletion_box" GridPane.rowIndex="4" GridPane.columnIndex="7"  GridPane.columnSpan="3"  GridPane.rowSpan="2"
-          alignment="TOP_LEFT" >
+    <VBox fx:id="deletion_box" alignment="TOP_LEFT" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
         <children>
-            <Button fx:id="delete_but" onAction="#deleteThings" defaultButton="true" text="Delete List"></Button>   <!--onAction="#createThings"-->
-            <TextField fx:id="delete_text" text="List/Item desc here"></TextField>
+            <Button fx:id="delete_but" defaultButton="true" onAction="#deleteThings" text="Delete List" />   <!--onAction="#createThings"-->
+            <TextField fx:id="delete_text" text="List/Item desc here" />
         </children>
     </VBox>
 
-    <HBox fx:id="external_file_box" GridPane.rowIndex="6" GridPane.columnIndex="3"  GridPane.columnSpan="5"  GridPane.rowSpan="1">
+    <HBox fx:id="external_file_box" GridPane.columnIndex="3" GridPane.columnSpan="5" GridPane.rowIndex="6" GridPane.rowSpan="1">
         <children>
-            <Button fx:id="save_but" onAction="#save" defaultButton="true" text="Save List"></Button>
-            <Button fx:id="load_but" onAction="#load" defaultButton="true" text="Load List"></Button>
-            <TextField fx:id="load_desc" text="List desc here"></TextField>
+            <Button fx:id="save_but" defaultButton="true" onAction="#save" text="Save List" />
+            <Button fx:id="load_but" defaultButton="true" onAction="#load" text="Load List" />
+            <TextField fx:id="load_desc" text="List desc here" />
         </children>
     </HBox>
 
-    <ScrollPane fx:id="ScrollArea" prefHeight="345" prefWidth="870" GridPane.rowIndex="2" GridPane.columnIndex="0"
-                GridPane.columnSpan="6" GridPane.rowSpan="4">
+    <ScrollPane fx:id="ScrollArea" prefHeight="345" prefWidth="870" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="2" GridPane.rowSpan="4">
         <content>
-            <VBox fx:id="scroll_content" alignment="TOP_LEFT" >
+            <VBox fx:id="scroll_content" alignment="TOP_LEFT">
                 <children>
                     <!--
                     <HBox spacing="100">
@@ -113,30 +98,10 @@
             </VBox>
         </content>
     </ScrollPane>
+   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
+      <children>
+         <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#clearList" text="Clear List" />
+      </children>
+   </HBox>
 
 </GridPane>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,8 +2,10 @@
 'https://plantuml.com/class-diagram
 
 abstract class ToDoList{
-    listItems:ArrayList<Item>
-    title:String
+    +listItems:ArrayList<Item>
+    -title:String
+    +getTitle():String
+    +editTitle():void
 }
 
 @enduml

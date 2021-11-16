@@ -26,3 +26,4 @@ JUnit Tests:
 19. load file of todolist previously saved and make sure it loaded list matches the file contents
 20. load files of all todolists previously saved and make sure each loaded list matches the contents of
     corresponding file
+21. test clear list and verify list size is 0

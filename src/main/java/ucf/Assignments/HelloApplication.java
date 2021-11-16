@@ -21,15 +21,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class HelloApplication extends Application {
-    private static ArrayList<ToDoList> toDoLists;
-    int curListIndex;
-    int curFilterIndex;
-    Scene scene;
+    static ArrayList<ToDoList> toDoLists;
+    private   int curListIndex;
+    public  int curFilterIndex;
+    private Scene scene;
 
 
     @Override
@@ -56,11 +58,20 @@ public class HelloApplication extends Application {
             TextField creationText = (TextField) scene.lookup("#creation_text");
             String nameOfList = creationText.getText();
 
-            // create a new list and add to the arraylist and to the scene
-            ToDoList newList = new ToDoList(nameOfList);
-            toDoLists.add(newList);
+            boolean present = false;
+            for (ToDoList lz : toDoLists){
+                if (lz.getTitle().equals(nameOfList)){
+                    present = true;
+                }
+            }
 
-            visualizeContents(viewingLists);
+            if (!present) {
+                // create a new list and add to the arraylist and to the scene
+                ToDoList newList = new ToDoList(nameOfList);
+                toDoLists.add(newList);
+
+                visualizeContents(viewingLists);
+            }
         }
         else {
             // meaning we are viewing the items
@@ -94,12 +105,11 @@ public class HelloApplication extends Application {
     public Item makeItem(VBox content){
         DatePicker dp = (DatePicker) content.getChildren().get(2);
         LocalDate ld = dp.getValue();
-        Date dateObj = new Date( );
-        dateObj.setYear(ld.getYear());
-        dateObj.setDate(ld.getDayOfMonth());
-        dateObj.setMonth(ld.getMonthValue());
+        GregorianCalendar dateObj = new GregorianCalendar(ld.getYear(),
+                                  ld.getMonthValue()-1,ld.getDayOfMonth());
 
-        CheckBox cb = (CheckBox) content.getChildren().get(3);
+        HBox compBox = (HBox) content.getChildren().get(3);
+        CheckBox cb = (CheckBox) compBox.getChildren().get(0);
 
         TextField tf = (TextField) content.getChildren().get(1);
 
@@ -121,6 +131,7 @@ public class HelloApplication extends Application {
                 if (toDoLists.get(i).getTitle().equals(nameToDelete) ){
                     toDoLists.remove(i);
                     visualizeContents(viewingLists);
+                    break;
                 }
             }
         }
@@ -129,6 +140,7 @@ public class HelloApplication extends Application {
                 if (toDoLists.get(curListIndex).listItems.get(i).getDesc().equals(nameToDelete) ){
                     toDoLists.get(curListIndex).listItems.remove(i);
                     visualizeContents(viewingLists);
+                    break;
                 }
 
             }
@@ -165,9 +177,13 @@ public class HelloApplication extends Application {
         VBox createContent = (VBox) scene.lookup("#creation_box");
         VBox deleteContent = (VBox) scene.lookup("#deletion_box");
         createContent.getChildren().add(new DatePicker());
-        createContent.getChildren().add(new CheckBox());
+        HBox compBox1 = new HBox(new CheckBox(), new Label("Completed?") );
+        HBox compBox2 = new HBox(new CheckBox(), new Label("Completed?") );
+        createContent.getChildren().add(compBox1);
+        //createContent.getChildren().add(new Label("Completed?"));
         deleteContent.getChildren().add(new DatePicker());
-        deleteContent.getChildren().add(new CheckBox());
+        deleteContent.getChildren().add(compBox2);
+        //deleteContent.getChildren().add(new Label("Completed?"));
 
         Button createButton = (Button) scene.lookup("#creation_but");
         Button deleteButton = (Button) scene.lookup("#delete_but");
@@ -235,14 +251,11 @@ public class HelloApplication extends Application {
     public HBox makeItemView(Item item, int index){
         // item needs:  desc   edit
         String desc = item.getDesc();
-        Date due_date = item.getDate();
+        GregorianCalendar due_date = item.getDate();
         boolean item_done = item.isDone();
-
-        int year = due_date.getYear();
-        int day = due_date.getDate();
-        int month = due_date.getMonth();
-
-        String date = "" + year + "-" + month + "-" + day ;
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        fmt.setCalendar(due_date);
+        String date = fmt.format(due_date.getTime());
 
         String done = "Completed";
         if (!item_done)
@@ -266,11 +279,12 @@ public class HelloApplication extends Application {
 
         for (Item item : toDoLists.get(i).listItems ){
             String fields = item.getDesc() + ";";
-            Date dueDate = item.getDate();
-            int year = dueDate.getYear();
-            int day = dueDate.getDate();
-            int month = dueDate.getMonth();
-            fields = fields + year +  "-" + month + "-" + day + ";";
+            GregorianCalendar dueDate = item.getDate();
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            fmt.setCalendar(dueDate);
+            String date = fmt.format(dueDate.getTime());
+
+            fields = fields + date + ";";
             if (item.isDone()){
                 fields = fields + "Completed\n";
             }
@@ -299,11 +313,7 @@ public class HelloApplication extends Application {
         }
     }
 
-    public void load(ActionEvent actionEvent){
-        Button creationBut = (Button) actionEvent.getTarget();
-        scene = creationBut.getScene();
-        TextField content = (TextField) scene.lookup("#load_desc");
-        String[] listsToLoad = content.getText().split(";");
+    public void load_files(String[] listsToLoad){
         for (String fileName : listsToLoad){
             String listName = fileName.replace(".txt", "");
             ToDoList newList = new ToDoList(listName);
@@ -315,11 +325,11 @@ public class HelloApplication extends Application {
                     String done_str = fields[2];
                     String[] date_arr = fields[1].split("-");
                     int year = Integer.parseInt(date_arr[0]);
-                    int month = Integer.parseInt(date_arr[1]);
+                    int month = Integer.parseInt(date_arr[1]) - 1;
                     int day = Integer.parseInt(date_arr[2]);
 
 
-;                   Item newItem = new Item(itemDesc, new Date(year, month, day), done_str.equals("Completed") );
+                    ;                   Item newItem = new Item(itemDesc, new GregorianCalendar(year, month, day), done_str.equals("Completed") );
                     newList.listItems.add(newItem);
                 }
                 // line is not visible here.
@@ -327,8 +337,26 @@ public class HelloApplication extends Application {
                 e.printStackTrace();
             }
         }
+    }
 
+    public void load(ActionEvent actionEvent){
+        Button creationBut = (Button) actionEvent.getTarget();
+        scene = creationBut.getScene();
+        TextField content = (TextField) scene.lookup("#load_desc");
+        String[] listsToLoad = content.getText().split(";");
+
+        load_files(listsToLoad);
         visualizeContents(true);
+    }
+
+    public void clearList(ActionEvent actionEvent) {
+        scene = ((Button) actionEvent.getTarget()).getScene();
+        Button createButton = (Button) scene.lookup("#creation_but");
+
+        if (createButton.getText().contains("Item")) {
+            toDoLists.get(curListIndex).listItems.clear();
+            visualizeContents(false);
+        }
     }
 }
 

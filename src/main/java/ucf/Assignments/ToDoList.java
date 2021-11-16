@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class ToDoList {
     public ArrayList<Item> listItems;
-    String title;
+    private String title;
 
     public ToDoList(String listTitle){
         listItems = new ArrayList<Item>();
@@ -19,5 +19,9 @@ public class ToDoList {
 
     public String getTitle(){
         return title;
+    }
+
+    public void editTitle(String newTitle){
+        title = newTitle;
     }
 }
